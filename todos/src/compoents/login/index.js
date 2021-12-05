@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import axios from "axios";
 import "./style.css";
 
@@ -7,6 +7,14 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const Login = () => {
     const [logemail, setLogEmail] = useState("");
 const [logpassword, setLogPassword] = useState("");
+
+const [token,setToken]= useState("");
+
+useEffect(() => {
+    const token = localStorage.getItem("token");
+    setToken(token);
+}, [])
+
 
 const login = async () => {
 try{
