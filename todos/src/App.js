@@ -1,72 +1,33 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
+import {Routes, Route } from "react-router";
+import './App.css';
 
-import "./App.css";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+import Registration from "./compoents/register"
+import Login from "./compoents/login"
 
 
 function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const register = async () => {
-try{
+ return (
+    
+    <div className="homepage">
 
-const result=await axios.post(`${BASE_URL}/signup`,
-{
-  email:email,
-  password:password
-});
-console.log(result)
-}
-catch(error)
-{
-  console.log(console.error)
-}
+<Routes>
+        <Route path="/" element={<Login />} />
+       
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Registration />} />
 
-  };
-
-///////////login 
-const [logemail, setLogEmail] = useState("");
-const [logpassword, setLogPassword] = useState("");
-
-const login = async () => {
-try{
-
-const result=await axios.post(`${BASE_URL}/login`,
-{
-email:logemail,
-password:logpassword
-});
-console.log(result)
-}
-catch(error)
-{
-console.log(console.error)
-}
-
-};
-  return (
-    <div className="App">
-      <input
-        placeholder="email"
-        type="text"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        placeholder="password"
-        type="text"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={register}>sign-up</button>
-      <br />
-      <input placeholder="email" type="text" onChange={(e) => setLogEmail(e.target.value)}   />
-      <input placeholder="password" type="password"  onChange={(e) => setLogPassword (e.target.value)}   />
-      <button  onClick={login}>log-In</button>
-
-    </div>
+        <Route
+          path="*"
+          render={() => {
+            return <h1>404</h1>;
+          }}
+        />
+      </Routes>
+   
+       </div> 
+   
   );
 }
-
 export default App;
