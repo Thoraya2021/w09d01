@@ -1,9 +1,9 @@
 import React from "react";
 import {Routes, Route } from "react-router";
 import './App.css';
-
-import Registration from "./compoents/register"
+import Register from "./compoents/register";
 import Login from "./compoents/login"
+import Todos from "./compoents/todo";
 
 
 function App() {
@@ -13,11 +13,10 @@ function App() {
     <div className="homepage">
 
 <Routes>
-        <Route path="/" element={<Login />} />
-       
+      
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Registration />} />
-
+        <Route exact path="/register" element={< Register />} />
+        <Route exact path="/todos" element={<Todos />} />
         <Route
           path="*"
           render={() => {

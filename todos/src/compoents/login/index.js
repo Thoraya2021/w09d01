@@ -8,8 +8,6 @@ const Login = () => {
     const [logemail, setLogEmail] = useState("");
 const [logpassword, setLogPassword] = useState("");
 
-
-
 const login = async () => {
 try{
 
