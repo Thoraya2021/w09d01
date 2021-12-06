@@ -1,3 +1,4 @@
+
 import React, { useState,useEffect } from "react";
 import axios from "axios";
 import "./style.css";
@@ -19,7 +20,7 @@ const Todos = () => {
 const todoss = async () => {
 try{
 
-const result=await axios.get(`${BASE_URL}/alltodos`,
+const result=await axios.get(`${BASE_URL}/todo/alltodos`,
 {
   headers:
    { Authorization: `bearer ${token}` },
@@ -38,7 +39,7 @@ console.log(console.error)
 //////////add new tasks
 const addtodo = async () => {
     await axios.post(
-      `${BASE_URL}/todos`,
+      `${BASE_URL}/todo/todos`,
       {
         name:todos,
       },
@@ -62,7 +63,7 @@ todoRouter.delete("/todos/:id",authentication, deleteTodo);
 
 const deletetodo = async (id) => {
     await axios.delete(
-      `${BASE_URL}/todos/${id}`,
+      `${BASE_URL}/todo/todos/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -72,32 +73,40 @@ const deletetodo = async (id) => {
     todoss(token);
 };
 
-  return (
-
-    <div className="todos">
+  return ( <div className="tasks">
+        <h1>Here what`s Tasks</h1>
+        <div>
          <input
            className="addtodo"
            onChange={(e) => setTodos(e.target.value)}
            placeholder="here what to do"
          />
- 
-  {todos.length && todos.map((item, i) => (
-        <ul>
-          <li key={i}>{item.todos}</li>
-          <button className="addto" onClick={addtodo}>
-               add task
-              </button>
-         <button
-                        className="delete"
-                        onClick={() => deletetodo(todos._id)}
-                      >
-                       delete task
-                      </button>
-        </ul>
+         
+<button className="addtask" onClick={addtodo}>  add task</button>
+</div>
+
+<ul className="list-t">
+  {todos.map((item) => (
+ <div key={item._id}>
+    <li>
+        {item.name} 
+  </li>  
+   <div >
+      <button className="delete" onClick={() => deletetodo(todos._id)} >delete task</button>
+ </div>   
+  </div>
       ))}
 
+  </ul>
+
   </div>
-);
-}
+  )};
 
 export default Todos;
+
+
+
+
+
+
+
